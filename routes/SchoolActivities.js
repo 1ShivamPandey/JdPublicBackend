@@ -1,5 +1,5 @@
 const express = require("express")
-const{GalleryDataUpload,FetchGalleryData} = require("../controllers/SchoolActivitiesController");
+const{GalleryDataUpload,FetchGalleryData,DeleteActivitiesData} = require("../controllers/SchoolActivitiesController");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -15,4 +15,6 @@ const upload = multer({ storage });
 const router = express.Router();
 
 router.route("/SchoolActivities").post(upload.single("productImage"),GalleryDataUpload).get(FetchGalleryData)
+router.delete("/SchoolActivities/:id", DeleteActivitiesData);
+
 module.exports=router;

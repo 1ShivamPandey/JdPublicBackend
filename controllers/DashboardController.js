@@ -40,12 +40,12 @@ const GalleryDataUpload = asynchandler(async (req, res) => {
   if (ProductData) {
     res.status(201).json({
       _id: ProductData._id,
-    //   productName: ProductData.name,
-    //   productPrice: ProductData.price,
-    //   productQuantity: ProductData.Quantity,
+      //   productName: ProductData.name,
+      //   productPrice: ProductData.price,
+      //   productQuantity: ProductData.Quantity,
       productDetails: ProductData.Details,
-    //   productSize: ProductData.Size,
-    //   productCategory: ProductData.Category,
+      //   productSize: ProductData.Size,
+      //   productCategory: ProductData.Category,
       productImage: ProductData.Image,
     });
     console.log("Done ");
@@ -56,16 +56,33 @@ const GalleryDataUpload = asynchandler(async (req, res) => {
   }
 });
 
-
 const FetchGalleryData = asynchandler(async (req, res) => {
-    try {
-      const productData = await productuploadDetails.find(); 
-      res.status(200).json({  ProductData :productData });
-       console.log("Here is the product data",productData)
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
+  try {
+    const productData = await productuploadDetails.find();
+    res.status(200).json({ ProductData: productData });
+    console.log("Here is the product data", productData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+const DeleteGalleryData = asynchandler(async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const product = await productuploadDetails.findById(productId);
+
+    if (!product) {
+      res.status(404).json({ message: "Product not found" });
+      return;
     }
-  
-  });
-module.exports = { GalleryDataUpload,FetchGalleryData };
+
+    await product.deleteOne(); // Use deleteOne() to delete the document
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete product" });
+  }
+});
+module.exports = { GalleryDataUpload, FetchGalleryData, DeleteGalleryData };

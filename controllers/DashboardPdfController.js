@@ -41,4 +41,23 @@ const FetchPdfData = asynchandler(async (req, res) => {
   }
 });
 
-module.exports = { PdfDataUpload, FetchPdfData };
+
+const DeletePdfData = asynchandler(async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const product = await productuploadDetails.findById(productId);
+
+    if (!product) {
+      res.status(404).json({ message: "Product not found" });
+      return;
+    }
+
+    await product.deleteOne(); // Use deleteOne() to delete the document
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete product" });
+  }
+});
+module.exports = { PdfDataUpload, FetchPdfData,DeletePdfData };

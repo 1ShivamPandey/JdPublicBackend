@@ -11,6 +11,7 @@ const DashboardPDF = require("./routes/DashboardPDF")
 const MandatoryDisclosure = require("./routes/MandatoryDisclosure")
 const Youtube = require("./routes/youtube")
 const SchoolActivities = require("./routes/SchoolActivities")
+const SchoolAdventure = require("./routes/SchoolAdventure")
 
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use("/api/Dashboard/PDF",DashboardPDF);
 app.use("/api/Dashboard/MandatoryDisclosure",MandatoryDisclosure);
 app.use("/api/Dashboard/youtube",Youtube);
 app.use("/api/Dashboard/school",SchoolActivities);
+app.use("/api/Dashboard/school",SchoolAdventure);
 
 
 
@@ -44,6 +46,7 @@ app.use("/GalleryImages", express.static(path.join(__dirname, "GalleryImages")))
 app.use("/ExaminationDatesheet", express.static(path.join(__dirname, "ExaminationDatesheet")));
 app.use("/MandatoryDisclosure", express.static(path.join(__dirname, "MandatoryDisclosure")));
 app.use("/SchoolActivities", express.static(path.join(__dirname, "SchoolActivities")));
+app.use("/SchoolAdventure", express.static(path.join(__dirname, "SchoolAdventure")));
 
 
 app.use(express.urlencoded({ extended: false }));
