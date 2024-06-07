@@ -39,8 +39,8 @@ app.use("/api/Dashboard/school",SlideShow);
 
 
 
-app.get("/",(req,res)=>{
-res.send("Hey ")
+app.get("/api",(req,res)=>{
+res.send("Hey this is Jd public ")
 //res.send("bro")
 })
 
