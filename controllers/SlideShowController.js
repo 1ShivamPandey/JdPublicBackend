@@ -1,5 +1,5 @@
 const asynchandler = require("express-async-handler");
-const productuploadDetails = require("../models/DashboardModel");
+const productuploadDetails = require("../models/SlideShowModel");
 
 const GalleryDataUpload = asynchandler(async (req, res) => {
   const {
